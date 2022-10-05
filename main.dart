@@ -11,6 +11,7 @@ class bottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
     child: Container(
+      height: 60,
     child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -30,19 +31,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
-        body: ListView(
-            children: [
-              ListTile(
+        body: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (c,i){
+              return ListTile(
                 leading: Icon(Icons.account_circle, size: 50,),
-                title: Text('홍길동', style: TextStyle(fontSize: 20,),),),
-              ListTile(
-                leading: Icon(Icons.account_circle, size: 50,),
-                title: Text('홍길동', style: TextStyle(fontSize: 20,),),),
-              ListTile(
-                leading: Icon(Icons.account_circle, size: 50,),
-                title: Text('홍길동', style: TextStyle(fontSize: 20,),),),]
-                ,
-              ),
+                title: Text('홍길동', style: TextStyle(fontSize: 20,),
+                ),
+              );
+            }, ),
         bottomNavigationBar: bottom(),
           ),
         );
