@@ -11,70 +11,43 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () => {},
-                    color: Colors.black),
-                IconButton(
-                    icon: Icon(Icons.menu),
-                    onPressed: () => {},
-                    color: Colors.black),
-                IconButton(
-                    icon: Icon(Icons.notifications_outlined),
-                    onPressed: () => {},
-                    color: Colors.black)
-              ],
-              title: Row(
-                children: [
-                  Text('금호동 3가', style: TextStyle(color: Colors.black)),
-                  // Icon(Icons.arrow_drop_down, color: Colors.black),
-                  IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                      color: Colors.black),
-                ],
-              ),
-              backgroundColor: Colors.white,
-              // actions: [],
-            ),
-            body: ShopItem()));
+      appBar: AppBar(title: Text('2번째 과제')),
+      bottomNavigationBar: BottomNavBarWidget(),
+      body: ListViewWidget(),
+    ));
   }
 }
 
-class ShopItem extends StatelessWidget {
-  const ShopItem({super.key});
+class ListViewWidget extends StatelessWidget {
+  const ListViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 150,
-        padding: EdgeInsets.only(left: 20, top: 15, right: 20),
-        child: Row(
-          children: [
-            Container(
-                margin: EdgeInsets.only(right: 16),
-                child: Image.asset('assets/camera.jpeg', width: 150)),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('캐논 DSLR 100D (단렌즈, 충전기 16기가SD 포함)',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Text('고양시 덕양구 화정동 10분 전',
-                      style: TextStyle(color: Colors.grey)),
-                  Text('210,000원',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [Icon(Icons.favorite_outline), Text('4')],
-                  )
-                ],
-              ),
-            ),
-          ],
-        ));
+    return ListView(
+      children: [
+        Row(children: const [Icon(Icons.person), Text('홍길동')]),
+        Row(children: const [Icon(Icons.person), Text('홍길동')]),
+        Row(children: const [Icon(Icons.person), Text('홍길동')]),
+      ],
+    );
+  }
+}
+
+class BottomNavBarWidget extends StatelessWidget {
+  const BottomNavBarWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.phone), label: '전화'),
+        BottomNavigationBarItem(icon: Icon(Icons.message), label: '메시지'),
+        BottomNavigationBarItem(icon: Icon(Icons.add), label: '추가'),
+      ],
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      selectedItemColor: Colors.blue,
+      unselectedItemColor: Colors.black,
+    );
   }
 }
