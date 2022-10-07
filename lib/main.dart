@@ -39,36 +39,42 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.white,
               // actions: [],
             ),
-            body: Container(
-                height: 150,
-                padding: EdgeInsets.only(left: 20, top: 15, right: 20),
-                child: Row(
-                  children: [
-                    Container(
-                        margin: EdgeInsets.only(right: 16),
-                        child: Image.asset('assets/camera.jpeg', width: 150)),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('캐논 DSLR 100D (단렌즈, 충전기 16기가SD 포함)',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold)),
-                          Text('고양시 덕양구 화정동 10분 전',
-                              style: TextStyle(color: Colors.grey)),
-                          Text('210,000원',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Icon(Icons.favorite_outline),
-                              Text('4')
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ))));
+            body: ShopItem()));
+  }
+}
+
+class ShopItem extends StatelessWidget {
+  const ShopItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 150,
+        padding: EdgeInsets.only(left: 20, top: 15, right: 20),
+        child: Row(
+          children: [
+            Container(
+                margin: EdgeInsets.only(right: 16),
+                child: Image.asset('assets/camera.jpeg', width: 150)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('캐논 DSLR 100D (단렌즈, 충전기 16기가SD 포함)',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text('고양시 덕양구 화정동 10분 전',
+                      style: TextStyle(color: Colors.grey)),
+                  Text('210,000원',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: const [Icon(Icons.favorite_outline), Text('4')],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }
