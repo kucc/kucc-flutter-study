@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kucc_flutter/services/permission_service.dart';
 import 'package:kucc_flutter/views/show_dialog_screen.dart';
-import 'package:kucc_flutter/views/test_screen.dart';
-import 'package:kucc_flutter/views/welcome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +15,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: const ShowDialogScreen(),
+      home: Builder(
+        builder: (context) {
+          // PermissionService.getPermission();
+          return const ShowDialogScreen();
+        }
+      ),
     );
   }
 }
