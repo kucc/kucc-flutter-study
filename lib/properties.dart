@@ -1,0 +1,1 @@
+String codingAppleUri = 'https://codingapple1.github.io/app/data.json';
