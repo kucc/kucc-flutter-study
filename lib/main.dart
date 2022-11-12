@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/screens/feed_screen.dart';
-import 'styles.dart';
+import 'styles.dart' as styles;
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: mainTheme,
+      theme: styles.mainTheme,
       home: FeedScreen(),
     );
   }
