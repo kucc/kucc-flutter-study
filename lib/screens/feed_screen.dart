@@ -14,13 +14,15 @@ class FeedScreen extends StatelessWidget {
 
     return GetBuilder<FeedController>(
       builder: (controller) {
-        // WidgetsBinding.instance.addPostFrameCallback((_) { controller.getFeeds(); });
         return Scaffold(
           appBar: AppBar(
             centerTitle: false,
             title: const Text('Instagram'),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.add_box_outlined))
+              IconButton(
+                  onPressed: controller.onAddPhotoClick,
+                  icon: const Icon(Icons.add_box_outlined)
+              )
             ],
           ),
           bottomNavigationBar: GetX<FeedController>(

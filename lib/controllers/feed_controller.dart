@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/screens/upload_screen.dart';
 import 'package:instagram_clone/services/feed_http_service.dart';
 
 import '../models/feed_model.dart';
@@ -80,5 +82,17 @@ class FeedController extends GetxController {
             return onFlyBuilder(context);
           }
         };
+  }
+
+  void onAddPhotoClick() async {
+    var picker = ImagePicker();
+    var image = await picker.getImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      var file = File(image.path);
+      Get.to(UploadScreen(image: file));
+    } else {
+      return null;
+    }
   }
 }
