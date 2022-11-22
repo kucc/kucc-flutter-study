@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/feed_model.dart';
 
@@ -11,7 +13,9 @@ class FeedCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.network(model.imageUrl),
+        model.imageUrl != null ?
+        Image.network(model.imageUrl!) :
+        Image.file(File(model.localImage!)),
         Text(model.user),
         Text(model.content),
       ]

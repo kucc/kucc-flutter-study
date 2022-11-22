@@ -1,4 +1,5 @@
 
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'feed_model.g.dart';
@@ -6,11 +7,21 @@ part 'feed_model.g.dart';
 @JsonSerializable()
 class FeedModel {
 
-  FeedModel(this.id, this.imageUrl, this.likes, this.date, this.content, this.liked, this.user);
+  FeedModel({
+    required this.id,
+    this.imageUrl,
+    this.localImage,
+    required this.likes,
+    required this.date,
+    required this.content,
+    required this.liked,
+    required this.user});
 
   final int id;
   @JsonKey(name: 'image')
-  final String imageUrl;
+  final String? imageUrl;
+  @JsonKey(name: 'localImage')
+  final String? localImage;
   final int likes;
   final String date;
   final String content;

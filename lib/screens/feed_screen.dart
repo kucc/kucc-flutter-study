@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/controllers/feed_controller.dart';
 
-import '../models/feed_model.dart';
 import '../widgets/feed_card.dart';
 
 class FeedScreen extends StatelessWidget {
@@ -45,10 +44,10 @@ class FeedScreen extends StatelessWidget {
               );
             }
           ),
-          body: StreamBuilder<FeedModel>(
-            stream: controller.feedStream,
+          body: GetX<FeedController>(
             builder: controller.buildFeedList(
-                dataBuilder: (context, feed) {
+                context: context,
+                dataBuilder: (context, feedData) {
                   return ListView.builder(
                     itemCount: controller.feedData.length,
                     controller: controller.scrollController,
@@ -62,6 +61,9 @@ class FeedScreen extends StatelessWidget {
                 },
                 onFlyBuilder: (context) {
                   return const CircularProgressIndicator();
+                },
+                onEmptyBuilder: (context) {
+                  return const Text('Empty');
                 }
             )
           )

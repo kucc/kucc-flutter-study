@@ -1,28 +1,31 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/controllers/upload_controller.dart';
 import 'package:instagram_clone/screens/upload_screen.dart';
 import 'package:instagram_clone/services/feed_http_service.dart';
 
 import '../models/feed_model.dart';
 
-typedef FeedListFunction = Widget Function(BuildContext, AsyncSnapshot<FeedModel>);
-typedef FeedFunction = Widget Function(BuildContext, FeedModel);
-typedef ErrorFunction = Widget Function(BuildContext, Object?);
+typedef FeedListFunction = Widget Function(FeedController);
+typedef FeedFunction = Widget Function(BuildContext, RxList<FeedModel>);
+typedef ErrorFunction = Widget Function(BuildContext, RxString);
 typedef OnFlyFunction = Widget Function(BuildContext);
+typedef OnEmptyFunction = Widget Function(BuildContext);
 
 class FeedController extends GetxController {
 
   final List<String> tabTexts = [ 'Home', 'Shop' ];
-  final List<FeedModel> feedData = [];
   final ScrollController scrollController = ScrollController();
-  final StreamController<FeedModel> feedStreamController = StreamController.broadcast();
-  late final Stream<FeedModel> feedStream = feedStreamController.stream;
+
+  final RxList<FeedModel> feedData = RxList([]);
   RxInt tabIndex = 0.obs;
+  RxBool isLoading = false.obs;
+  RxBool isError = false.obs;
+  RxString errorMessage = ''.obs;
 
   int feedListIndex = -1;
   int maxFeedListIndex = 2;
@@ -53,33 +56,45 @@ class FeedController extends GetxController {
       return;
     }
 
+    isLoading.value = true;
     try {
       var feedList = await FeedHttpService.getFeedListFromServer(
           url: FeedHttpService.feedMoreUrls[feedListIndex]
       );
       for (var feed in feedList) {
-        feedStreamController.add(feed);
         feedData.add(feed);
       }
     } on HttpException catch (e) {
+        isError.value = true;
       if (kDebugMode) {
         print('Error ${e.message}');
       }
+    } on SocketException catch (se) {
+        isError.value = true;
+      if (kDebugMode) {
+        print('Error ${se.message}');
+      }
     }
+
+    isLoading.value = false;
   }
 
   FeedListFunction buildFeedList({
+    required BuildContext context,
     required FeedFunction dataBuilder,
     required ErrorFunction errorBuilder,
     required OnFlyFunction onFlyBuilder,
+    required OnEmptyFunction onEmptyBuilder,
   }) {
-        return (BuildContext context, AsyncSnapshot<FeedModel> snapshot) {
-          if (snapshot.hasData) {
-            return dataBuilder(context, snapshot.requireData);
-          } else if (snapshot.hasError) {
-            return errorBuilder(context, snapshot.error);
-          } else {
+        return (FeedController controller) {
+          if (feedData.isNotEmpty) {
+            return dataBuilder(context, feedData);
+          } else if (isError.value) {
+            return errorBuilder(context, errorMessage);
+          } else if (isLoading.value) {
             return onFlyBuilder(context);
+          } else {
+            return onEmptyBuilder(context);
           }
         };
   }
@@ -89,10 +104,18 @@ class FeedController extends GetxController {
     var image = await picker.getImage(source: ImageSource.gallery);
 
     if (image != null) {
-      var file = File(image.path);
-      Get.to(UploadScreen(image: file));
+      var uploadController = UploadController(
+          imagePath: image.path,
+          newIndex: feedData.length,
+          onSelect: addPhotoFront
+      );
+      Get.to(UploadScreen(controller: uploadController));
     } else {
       return null;
     }
+  }
+
+  void addPhotoFront(FeedModel model) {
+    feedData.insert(0, model);
   }
 }

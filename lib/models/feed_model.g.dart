@@ -7,18 +7,20 @@ part of 'feed_model.dart';
 // **************************************************************************
 
 FeedModel _$FeedModelFromJson(Map<String, dynamic> json) => FeedModel(
-      json['id'] as int,
-      json['image'] as String,
-      json['likes'] as int,
-      json['date'] as String,
-      json['content'] as String,
-      json['liked'] as bool,
-      json['user'] as String,
+      id: json['id'] as int,
+      imageUrl: json['image'] as String?,
+      localImage: json['localImage'] as String?,
+      likes: json['likes'] as int,
+      date: json['date'] as String,
+      content: json['content'] as String,
+      liked: json['liked'] as bool,
+      user: json['user'] as String,
     );
 
 Map<String, dynamic> _$FeedModelToJson(FeedModel instance) => <String, dynamic>{
       'id': instance.id,
       'image': instance.imageUrl,
+      'localImage': instance.localImage,
       'likes': instance.likes,
       'date': instance.date,
       'content': instance.content,
