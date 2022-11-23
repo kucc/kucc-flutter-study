@@ -4,19 +4,27 @@ import '../models/user_model.dart';
 
 class ProfileController extends GetxController {
 
-  final UserModel user;
-  final int id;
+  final user = UserModel(0, 'default', 0).obs;
+  var clientFollowed = false.obs;
 
-  final RxString username;
-  final RxInt followerCount;
-  final RxBool userFollowed;
+  ProfileController();
 
-  ProfileController({
-    required this.id,
-    required this.user,
-    required bool userFollowed
-  }) :
-  username = RxString(user.username),
-  followerCount = RxInt(user.followerCount),
-  userFollowed = RxBool(userFollowed);
+  initProfileData({required UserModel newUser, bool userFollowed = false}) {
+    user(newUser);
+    clientFollowed.value = userFollowed;
+  }
+
+  clientUserFollowToggle() {
+    if (!clientFollowed.value) {
+      user.update((model) {
+        model!.followerCount += 1;
+      });
+      clientFollowed.value = true;
+    } else {
+      user.update((model) {
+        model!.followerCount -= 1;
+      });
+      clientFollowed.value = false;
+    }
+  }
 }

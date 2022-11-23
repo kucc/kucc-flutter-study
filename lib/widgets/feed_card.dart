@@ -28,7 +28,7 @@ class FeedCard extends StatelessWidget {
             onTapUserName(feedData.user);
           },
           child: Hero(
-            tag: 'username_${feedData.id}',
+            tag: 'username_${feedData.user.id}',
             child: Text(feedData.user.username, style: styles.usernameFeedStyle),
           ),
         ),

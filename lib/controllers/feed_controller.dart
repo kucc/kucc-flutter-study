@@ -24,6 +24,7 @@ class FeedController extends GetxController {
 
   final List<String> tabTexts = [ 'Home', 'Shop' ];
   final ScrollController scrollController = ScrollController();
+  final ProfileController profileController = ProfileController();
 
   final RxList<FeedModel> feedData = RxList([]);
   RxInt tabIndex = 0.obs;
@@ -124,15 +125,11 @@ class FeedController extends GetxController {
   }
 
   void onTapUserName(UserModel user) {
-    var controller = ProfileController(
-      id: user.id,
-      user: user,
-      userFollowed: false
-    );
+    profileController.initProfileData(newUser: user);
 
     navigator!.push(
       CupertinoPageRoute(builder: (context) {
-        return ProfileScreen(controller: controller);
+        return ProfileScreen(controller: profileController);
       })
     );
   }
