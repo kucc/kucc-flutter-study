@@ -1,5 +1,6 @@
 
 
+import 'package:instagram_clone/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'feed_model.g.dart';
@@ -15,7 +16,8 @@ class FeedModel {
     required this.date,
     required this.content,
     required this.liked,
-    required this.user});
+    required String user}) :
+      user = UserModel(id, user, 0);
 
   final int id;
   @JsonKey(name: 'image')
@@ -26,7 +28,7 @@ class FeedModel {
   final String date;
   final String content;
   final bool liked;
-  final String user;
+  final UserModel user;
 
   factory FeedModel.fromJson(Map<String, dynamic> json) => _$FeedModelFromJson(json);
   Map<String, dynamic> toJson() => _$FeedModelToJson(this);

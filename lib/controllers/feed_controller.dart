@@ -2,13 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/controllers/profile_controller.dart';
 import 'package:instagram_clone/controllers/upload_controller.dart';
+import 'package:instagram_clone/screens/profile_screen.dart';
 import 'package:instagram_clone/screens/upload_screen.dart';
 import 'package:instagram_clone/services/feed_http_service.dart';
 
 import '../models/feed_model.dart';
+import '../models/user_model.dart';
 
 typedef FeedListFunction = Widget Function(FeedController);
 typedef FeedFunction = Widget Function(BuildContext, RxList<FeedModel>);
@@ -117,5 +121,19 @@ class FeedController extends GetxController {
 
   void addPhotoFront(FeedModel model) {
     feedData.insert(0, model);
+  }
+
+  void onTapUserName(UserModel user) {
+    var controller = ProfileController(
+      id: user.id,
+      user: user,
+      userFollowed: false
+    );
+
+    navigator!.push(
+      CupertinoPageRoute(builder: (context) {
+        return ProfileScreen(controller: controller);
+      })
+    );
   }
 }

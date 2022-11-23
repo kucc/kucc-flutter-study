@@ -16,3 +16,13 @@ var mainTheme = ThemeData(
     selectedItemColor: Colors.black,
   )
 );
+
+var usernameFeedStyle = const TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.bold
+);
+
+var usernameAppBarStyle = const TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold
+);

@@ -52,7 +52,10 @@ class FeedScreen extends StatelessWidget {
                     itemCount: controller.feedData.length,
                     controller: controller.scrollController,
                     itemBuilder: (context, index) {
-                      return FeedCard(model: controller.feedData[index]);
+                      return FeedCard(
+                        feedData: controller.feedData[index],
+                        onTapUserName: controller.onTapUserName,
+                      );
                     },
                   );
                 },
