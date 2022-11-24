@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "683879994053",
+    "project_id": "instagram-clone-keo",
+    "storage_bucket": "instagram-clone-keo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683879994053:android:87dec6e08b91a1cca156ac",
+        "android_client_info": {
+          "package_name": "com.kucc.keoinstagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683879994053-i1ud0do7l5pf1na1u4bk1iiqfm6q6785.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAOCVhxTEo_ooEkM9YlgSmloZ5Z8eyg2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683879994053-i1ud0do7l5pf1na1u4bk1iiqfm6q6785.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "683879994053-bc18lktvbueumj60cu9qklhd53k5ptut.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kucc.instagram-clone-keo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

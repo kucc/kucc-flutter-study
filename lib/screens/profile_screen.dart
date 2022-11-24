@@ -60,7 +60,8 @@ class ProfileScreen extends StatelessWidget {
                 childCount: feedController.feedData.length
               ), gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3));
             }
-          )
+          ),
+          SliverToBoxAdapter(child: Container(height: 800, color: Theme.of(context).primaryColor))
         ],
       ),
     );

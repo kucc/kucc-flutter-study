@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/controllers/feed_controller.dart';
+import 'package:instagram_clone/notification.dart';
 
 import '../widgets/feed_card.dart';
 
@@ -10,6 +11,7 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(FeedController());
+    initNotification();
 
     return GetBuilder<FeedController>(
       builder: (controller) {

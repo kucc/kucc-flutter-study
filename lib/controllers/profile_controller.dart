@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:instagram_clone/notification.dart';
 
 import '../models/user_model.dart';
 
@@ -15,6 +16,7 @@ class ProfileController extends GetxController {
   }
 
   clientUserFollowToggle() {
+    showNotification();
     if (!clientFollowed.value) {
       user.update((model) {
         model!.followerCount += 1;
