@@ -75,7 +75,7 @@ showNotificationTimeZoned() async {
       2,
       '제목2',
       '내용2',
-      tz.TZDateTime.now(tz.local).add(Duration(seconds: 5)),
+      tz.TZDateTime.now(tz.local).add(Duration(days: 1)),
       NotificationDetails(android: androidDetails, iOS: iosDetails),
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
